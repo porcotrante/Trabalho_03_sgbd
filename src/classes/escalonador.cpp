@@ -10,7 +10,6 @@ escalonador::escalonador(){
     if (!arquivo.is_open())
     {
         cerr << "Erro ao abrir o arquivo." << endl;
-        nEscalonamentos = 0;
         return;
     }
 
@@ -35,9 +34,6 @@ escalonador::escalonador(){
             }
         }
     }
-
-    // Total de linhas lidas menos as 3 primeiras
-    nEscalonamentos = linhaAtual - 3;
 
     arquivo.close();
 }
@@ -108,6 +104,9 @@ void escalonador::validar(vector<dado> dados){
             saida << "E_" << linhaAtual-3 << "OK" << endl;
         }
     }
+
+    entrada.close();
+    saida.close();
 }
 
 escalonador::~escalonador(){}
