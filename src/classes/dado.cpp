@@ -1,0 +1,64 @@
+#include "../headers/dado.hpp"
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+dado::dado(string nome, int id) {
+    this->idDado = id;
+    this->readTimestamp = 0;
+    this->writeTimestamp = 0;
+    this->nome = nome;
+
+    // Criar o arquivo "nome.txt"
+    ofstream arquivo(nome + ".txt");
+    if (arquivo.is_open()) {
+        arquivo.close();
+    }
+}
+
+void dado::limpar(){
+    this->readTimestamp = 0;
+    this->writeTimestamp = 0;
+
+    ofstream arquivo(nome + ".txt");
+    if (arquivo.is_open()) {
+        arquivo.clear();
+        arquivo.close();
+    }
+}
+
+int dado::escrever(int timestamp, int escalonamento, int momento){
+    if (timestamp < readTimestamp || timestamp < writeTimestamp)
+    {
+        return 0; //transação inválida, fazer rollback
+    }
+
+    this->writeTimestamp = timestamp;
+
+    ofstream arquivo(nome + ".txt");
+    if (arquivo.is_open()) {
+        arquivo << "E_" << escalonamento << "; " << "WRITE; " << momento << ";" << endl;
+        arquivo.close();
+    }
+
+    return 1;
+}
+
+int dado::ler(int timestamp, int escalonamento, int momento){
+        if (timestamp < writeTimestamp)
+    {
+        return 0; //transação inválida, fazer rollback
+    }
+
+    this->readTimestamp = timestamp;
+
+    ofstream arquivo(nome + ".txt");
+    if (arquivo.is_open()) {
+        arquivo << "E_" << escalonamento << "; " << "READ; " << momento << ";" << endl;
+        arquivo.close();
+    }
+    return 1;
+}
+
+dado::~dado() {}
