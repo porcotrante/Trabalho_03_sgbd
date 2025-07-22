@@ -7,10 +7,10 @@ public:
     int writeTimestamp;
     int readTimestamp;
     int idDado;
-    string nome;
+    char nome;
     void limpar();
     int escrever(int timestamp, int escalonamento, int momento);
     int ler(int timestamp, int escalonamento, int momento);
-    dado(string nome, int id);
+    dado(char nome, int id);
     ~dado();
 };

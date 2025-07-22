@@ -4,7 +4,7 @@
 
 using namespace std;
 
-dado::dado(string nome, int id) {
+dado::dado(char nome, int id) {
     this->idDado = id;
     this->readTimestamp = 0;
     this->writeTimestamp = 0;
@@ -20,12 +20,6 @@ dado::dado(string nome, int id) {
 void dado::limpar(){
     this->readTimestamp = 0;
     this->writeTimestamp = 0;
-
-    ofstream arquivo(nome + ".txt");
-    if (arquivo.is_open()) {
-        arquivo.clear();
-        arquivo.close();
-    }
 }
 
 int dado::escrever(int timestamp, int escalonamento, int momento){
