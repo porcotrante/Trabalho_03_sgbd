@@ -9,9 +9,8 @@ dado::dado(char nome, int id) {
     this->readTimestamp = 0;
     this->writeTimestamp = 0;
     this->nome = nome;
-
     // Criar o arquivo "nome.txt"
-    ofstream arquivo(nome + ".txt");
+    ofstream arquivo(string(1, nome) + ".txt");
     if (arquivo.is_open()) {
         arquivo.close();
     }
@@ -30,7 +29,7 @@ int dado::escrever(int timestamp, int escalonamento, int momento){
 
     this->writeTimestamp = timestamp;
 
-    ofstream arquivo(nome + ".txt");
+    ofstream arquivo(string(1, nome) + ".txt");
     if (arquivo.is_open()) {
         arquivo << "E_" << escalonamento << "; " << "WRITE; " << momento << ";" << endl;
         arquivo.close();
@@ -47,7 +46,7 @@ int dado::ler(int timestamp, int escalonamento, int momento){
 
     this->readTimestamp = timestamp;
 
-    ofstream arquivo(nome + ".txt");
+    ofstream arquivo(string(1, nome) + ".txt");
     if (arquivo.is_open()) {
         arquivo << "E_" << escalonamento << "; " << "READ; " << momento << ";" << endl;
         arquivo.close();

@@ -3,7 +3,7 @@
 using namespace std;
 
 int main() {
-    dado X = dado("X",1);
+    dado X = dado('X',1);
 
     cout << X.idDado << " " << X.nome << endl;
 }
