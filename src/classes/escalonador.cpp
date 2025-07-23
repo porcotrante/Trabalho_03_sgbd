@@ -92,6 +92,14 @@ void escalonador::validar(vector<dado> dados){
                     momento++;
                 }
             }
+            if (c == 'c') //em caso de commit
+            {
+            for (int i = 0; i < dados.size(); i++)
+            {
+                dados[i].limpar(); //limpar as estruturas de dados para o próximo escalonamento
+            }
+            }
+            
             if (rollback_ocorreu) break;
         }
 

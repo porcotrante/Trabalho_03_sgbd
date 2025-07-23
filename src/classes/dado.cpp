@@ -9,7 +9,6 @@ dado::dado(char nome, int id) {
     this->readTimestamp = 0;
     this->writeTimestamp = 0;
     this->nome = nome;
-    // Criar o arquivo "nome.txt"
     ofstream arquivo(string(1, nome) + ".txt");
     if (arquivo.is_open()) {
         arquivo.close();
