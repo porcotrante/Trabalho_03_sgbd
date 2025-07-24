@@ -1,3 +1,5 @@
+#ifndef ESCALONADOR_HPP
+#define ESCALONADOR_HPP
 #include <vector>
 #include "dado.hpp"
 using namespace std;
@@ -10,3 +12,4 @@ public:
     escalonador();
     ~escalonador();
 };
+#endif

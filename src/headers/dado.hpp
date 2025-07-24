@@ -1,3 +1,5 @@
+#ifndef DADO_HPP
+#define DADO_HPP
 #include <string>
 using namespace std;
 
@@ -14,3 +16,4 @@ public:
     dado(char nome, int id);
     ~dado();
 };
+#endif
