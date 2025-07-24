@@ -74,12 +74,11 @@ void escalonador::validar(vector<dado> dados){
                             int resultado;
                             if (c == 'r')
                             {
-                                int resultado = dados[j].ler(timestamps[transacao], linhaAtual-3, momento);
-                                
+                                resultado = dados[j].ler(timestamps[transacao-1], linhaAtual-3, momento);
                             }
                             else
                             {
-                                int resultado = dados[j].escrever(timestamps[transacao], linhaAtual-3, momento);
+                                resultado = dados[j].escrever(timestamps[transacao-1], linhaAtual-3, momento);
                             }
 
                             if (resultado == 0)
@@ -95,24 +94,21 @@ void escalonador::validar(vector<dado> dados){
             }
             if (c == 'c') //em caso de commit
             {
-            for (int i = 0; i < dados.size(); i++)
-            {
-                dados[i].limpar(); //limpar as estruturas de dados para o próximo escalonamento
-            }
+                for (int i = 0; i < dados.size(); i++)
+                {
+                    dados[i].limpar(); //limpar as estruturas de dados
+                }
+                momento++;
             }
             
             if (rollback_ocorreu) break;
         }
-
-        if (!rollback_ocorreu)
-        {  
-            for (int i = 0; i < dados.size(); i++)
-            {
-                dados[i].limpar(); //limpar as estruturas de dados para o próximo escalonamento
-            }
-            
-            saida << "E_" << linhaAtual-3 << "OK" << endl;
+        for (int i = 0; i < dados.size(); i++)
+        {
+            dados[i].limpar(); //limpar as estruturas de dados para o próximo escalonamento
         }
+            
+        if (!rollback_ocorreu) saida << "E_" << linhaAtual-3 << "-OK" << endl;
     }
 
     entrada.close();

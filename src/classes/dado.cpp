@@ -20,15 +20,14 @@ void dado::limpar(){
     this->writeTimestamp = 0;
 }
 
-int dado::escrever(int timestamp, int escalonamento, int momento){
-    if (timestamp < readTimestamp || timestamp < writeTimestamp)
-    {
-        return 0; //transação inválida, fazer rollback
+int dado::escrever(int timestamp, int escalonamento, int momento) {
+    if (timestamp < readTimestamp || timestamp < writeTimestamp) {
+        return 0; // transação inválida, fazer rollback
     }
 
     this->writeTimestamp = timestamp;
 
-    ofstream arquivo(string(1, nome) + ".txt");
+    ofstream arquivo(string(1, nome) + ".txt", ios::app);
     if (arquivo.is_open()) {
         arquivo << "E_" << escalonamento << "; " << "WRITE; " << momento << ";" << endl;
         arquivo.close();
@@ -37,19 +36,19 @@ int dado::escrever(int timestamp, int escalonamento, int momento){
     return 1;
 }
 
-int dado::ler(int timestamp, int escalonamento, int momento){
-        if (timestamp < writeTimestamp)
-    {
-        return 0; //transação inválida, fazer rollback
+int dado::ler(int timestamp, int escalonamento, int momento) {
+    if (timestamp < writeTimestamp) {
+        return 0; // transação inválida, fazer rollback
     }
 
-    this->readTimestamp = timestamp;
+    if (timestamp > readTimestamp) this->readTimestamp = timestamp;
 
-    ofstream arquivo(string(1, nome) + ".txt");
+    ofstream arquivo(string(1, nome) + ".txt", ios::app);
     if (arquivo.is_open()) {
         arquivo << "E_" << escalonamento << "; " << "READ; " << momento << ";" << endl;
         arquivo.close();
     }
+
     return 1;
 }
 

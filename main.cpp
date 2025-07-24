@@ -9,11 +9,10 @@ int main() {
     vector<dado> dados;
     dados.push_back(dado('X', 1));
     dados.push_back(dado('Y', 2));
-    dados.push_back(dado('W', 3));
-    dados.push_back(dado('Z', 4));
+    dados.push_back(dado('Z', 3));
 
     // Criar o escalonador (ele já lê automaticamente o arquivo in.txt no construtor)
-    escalonador esc;
+    escalonador esc = escalonador();
 
     cout << "Timestamps carregados: ";
     for (int timestamp : esc.timestamps) {
