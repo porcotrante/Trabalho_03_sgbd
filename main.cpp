@@ -22,9 +22,9 @@ int main() {
     cout << endl;
 
     // Validar os escalonamentos
-    cout << "Iniciando validação dos escalonamentos..." << endl;
+    cout << "Iniciando validacao dos escalonamentos..." << endl;
     esc.validar(dados);
-    cout << "Validação concluída. Verifique o arquivo out.txt para os resultados." << endl;
+    cout << "Validacao concluida. Verifique o arquivo out.txt para os resultados." << endl;
 
     return 0;
 }
